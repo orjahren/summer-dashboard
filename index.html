@@ -32,25 +32,33 @@
         name: "bade i en fontene",
         done: false,
         due: defaultduedate,
+        doneDate: null,
+        startedDate: new Date(),
       },
 
       {
         name: "bade i ifi-dammen",
         done: false,
         due: defaultduedate,
+        doneDate: null,
+        startedDate: new Date(),
       },
       {
         name: "møte en rev",
         done: false,
         due: defaultduedate,
+        doneDate: null,
+        startedDate: new Date(),
       },
       {
         name: "klappe en hund",
         done: true,
         due: defaultduedate,
+        doneDate: null,
+        startedDate: new Date(),
       },
     ];
-
+    //localStorage.setItem("db", JSON.stringify(sampleDb));
     console.log(sampleDb);
   </script>
   <head>
@@ -78,18 +86,44 @@
       </div>
     </div>
     <script type="text/javascript">
-      for (let i = 0; i < sampleDb.length; i++) {
-        console.log(i, sampleDb[i]);
-        const item = sampleDb[i];
-        document.getElementById(
-          item.done ? "doneUl" : "todoUl"
-        ).innerHTML += `<li><input type="checkbox" id="${item.name}" name="${item.name}">${item.name}<label for="${item.name}>${item.name}</label></li>`;
-        if (item.done) {
-          console.log("done");
-        } else {
-          console.log("not done");
+      let parsedDb = localStorage.getItem("db")
+        ? JSON.parse(localStorage.getItem("db"))
+        : [];
+
+      const generateLists = () => {
+        document.getElementById("doneUl").innerHTML = "";
+        document.getElementById("todoUl").innerHTML = "";
+
+        parsedDb.forEach((item) => {
+          console.log(item);
+
+          document.getElementById(
+            item.done ? "doneUl" : "todoUl"
+          ).innerHTML += `<li><input type="checkbox" id="${item.name}" name="${
+            item.name
+          }" class="checkboxes" ${item.done ? "checked" : ""}>${
+            item.name
+          }<label for="${item.name}>${item.name}</label></li>`;
+        });
+
+        const allCheckboxes = document.getElementsByClassName("checkboxes");
+
+        for (let i = 0; i < allCheckboxes.length; i++) {
+          allCheckboxes[i].addEventListener("input", (event) => {
+            parsedDb.forEach((item) => {
+              if (item.name === event.target.name) {
+                item.done = !item.done;
+                generateLists();
+                localStorage.setItem("db", JSON.stringify(parsedDb));
+                parsedDb = localStorage.getItem("db")
+                  ? JSON.parse(localStorage.getItem("db"))
+                  : [];
+              }
+            });
+          });
         }
-      }
+      };
+      generateLists();
     </script>
   </body>
 </html>
