@@ -54,8 +54,8 @@ const generateLists = () => {
         if (item.name === event.target.name) {
           item.done = !item.done;
           item.doneDate = item.done ? new Date() : null;
-          generateLists();
           localStorage.setItem("db", JSON.stringify(parsedDb));
+          generateLists();
         }
       });
     });
