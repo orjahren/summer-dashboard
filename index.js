@@ -1,5 +1,4 @@
 "use strict";
-
 const fadderukaStartDate = new Date("Aug 14, 2023 10:00:00");
 const interval = setInterval(function () {
   var distance = fadderukaStartDate.getTime() - new Date().getTime();
@@ -31,14 +30,14 @@ const newBucketListItem = (newName) =>
     )
   ) || generateLists();
 
-const generateCheckbox = (item) =>
-  `<li><input type="checkbox" id="${item.name}" name="${
-    item.name
-  }" class="checkboxes" ${item.done && "checked disabled"}>${
-    item.name
-  }<label for="${item.name}>${item.name}</label></li>`;
-
 const generateLists = () => {
+  const generateCheckbox = (item) =>
+    `<li><input type="checkbox" id="${item.name}" name="${
+      item.name
+    }" class="checkboxes" ${item.done && "checked disabled"}>${
+      item.name
+    }<label for="${item.name}>${item.name}</label></li>`;
+
   document.getElementById("doneUl").innerHTML = "";
   document.getElementById("todoUl").innerHTML = "";
 
