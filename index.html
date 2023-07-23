@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html>
   <script type="text/javascript">
-    console.log("Hello world");
-    const test = () => {
-      console.log("test");
-    };
     // Stolen from https://www.w3schools.com/howto/howto_js_countdown.asp
     const fadderukaStartDate = new Date("Aug 14, 2023 10:00:00");
     // Update the count down every 1 second
@@ -16,36 +12,32 @@
       );
       var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
       document.getElementById("countdownP").innerHTML =
         days + "d " + hours + "t " + minutes + "m " + seconds + "s ";
-
       if (distance < 0) {
         clearInterval(setInterval);
         console.warn("Fadderuka has started");
       }
     }, 1000);
 
-    const addItemToDatabase = (item) => {
-      const db = JSON.parse(localStorage.getItem("db"));
-      db.push(item);
-      localStorage.setItem("db", JSON.stringify(db));
-    };
-
-    const newBucketListItem = (newName) => {
-      console.log(newName);
-      const newItem = {
-        name: newName,
-        done: false,
-        due: fadderukaStartDate,
-        doneDate: null,
-        startedDate: new Date(),
-      };
-      addItemToDatabase(newItem);
-      generateLists();
-    };
-
     const defaultduedate = fadderukaStartDate;
+
+    const newBucketListItem = (newName) =>
+      localStorage.setItem(
+        "db",
+        JSON.stringify(
+          JSON.parse(localStorage.getItem("db")).concat([
+            {
+              name: newName,
+              done: false,
+              due: defaultduedate,
+              doneDate: null,
+              startedDate: new Date(),
+            },
+          ])
+        )
+      ) || generateLists();
+
     const sampleDb = [
       {
         name: "bade i en fontene",
@@ -78,7 +70,6 @@
       },
     ];
     //localStorage.setItem("db", JSON.stringify(sampleDb));
-    console.log(sampleDb);
   </script>
   <head>
     <title>Summer dashboard 2023</title>
@@ -87,11 +78,8 @@
   <body>
     <h1>Summer dashboard 2023</h1>
     <div>
-      <button onclick="test()">Init new database</button>
-    </div>
-    <div>
       <h2>Countdown til fadderuka</h2>
-      <p id="countdownP"></p>
+      <p id="countdownP">Laster countdown..</p>
     </div>
     <div>
       <h2>Bucket list items</h2>
@@ -114,9 +102,9 @@
     </div>
     <script type="text/javascript">
       const generateLists = () => {
-        const parsedDb = JSON.parse(localStorage.getItem("db"));
         document.getElementById("doneUl").innerHTML = "";
         document.getElementById("todoUl").innerHTML = "";
+        const parsedDb = JSON.parse(localStorage.getItem("db"));
         parsedDb.forEach((item) => {
           document.getElementById(
             item.done ? "doneUl" : "todoUl"
@@ -128,7 +116,6 @@
         });
 
         const allCheckboxes = document.getElementsByClassName("checkboxes");
-
         for (let i = 0; i < allCheckboxes.length; i++) {
           allCheckboxes[i].addEventListener("input", (event) => {
             parsedDb.forEach((item) => {
