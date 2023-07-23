@@ -54,7 +54,7 @@
         name: "klappe en hund",
         done: true,
         due: defaultduedate,
-        doneDate: null,
+        doneDate: new Date(),
         startedDate: new Date(),
       },
     ];
@@ -86,17 +86,12 @@
       </div>
     </div>
     <script type="text/javascript">
-      let parsedDb = localStorage.getItem("db")
-        ? JSON.parse(localStorage.getItem("db"))
-        : [];
+      let parsedDb = JSON.parse(localStorage.getItem("db")) ?? [];
 
       const generateLists = () => {
         document.getElementById("doneUl").innerHTML = "";
         document.getElementById("todoUl").innerHTML = "";
-
         parsedDb.forEach((item) => {
-          console.log(item);
-
           document.getElementById(
             item.done ? "doneUl" : "todoUl"
           ).innerHTML += `<li><input type="checkbox" id="${item.name}" name="${
@@ -115,9 +110,7 @@
                 item.done = !item.done;
                 generateLists();
                 localStorage.setItem("db", JSON.stringify(parsedDb));
-                parsedDb = localStorage.getItem("db")
-                  ? JSON.parse(localStorage.getItem("db"))
-                  : [];
+                parsedDb = JSON.parse(localStorage.getItem("db"));
               }
             });
           });
