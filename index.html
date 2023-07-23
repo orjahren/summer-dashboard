@@ -82,6 +82,9 @@
           allCheckboxes[i].addEventListener("input", (event) => {
             parsedDb.forEach((item) => {
               if (item.name === event.target.name) {
+                if (item.done) {
+                  item.doneDate = new Date();
+                }
                 item.done = !item.done;
                 generateLists();
                 localStorage.setItem("db", JSON.stringify(parsedDb));
