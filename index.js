@@ -34,9 +34,9 @@ const newBucketListItem = (newName) =>
 const generateCheckbox = (item) =>
   `<li><input type="checkbox" id="${item.name}" name="${
     item.name
-  }" class="checkboxes" ${item.done ? "checked" : ""}>${item.name}<label for="${
+  }" class="checkboxes" ${item.done && "checked disabled"}>${
     item.name
-  }>${item.name}</label></li>`;
+  }<label for="${item.name}>${item.name}</label></li>`;
 
 const generateLists = () => {
   document.getElementById("doneUl").innerHTML = "";

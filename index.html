@@ -5,30 +5,39 @@
     <meta charset="utf-8" />
   </head>
   <body>
-    <h1>Summer dashboard 2023</h1>
-    <div>
-      <h2>Countdown til fadderuka</h2>
-      <p id="countdownP">Laster countdown..</p>
-    </div>
-    <div>
-      <h2>Bucket list items</h2>
+    <header style="width: 100%; padding: 1rem">
+      <h1 style="text-align: center">Summer dashboard 2023</h1>
+      <p style="text-align: center">
+        <i> La seule chose qui permet à l'homme de vivre, c'est l'acte </i>
+      </p>
+    </header>
+    <main style="display: flex; justify-content: space-evenly">
       <div>
-        <p>Done</p>
-        <ul id="doneUl"></ul>
+        <h2>Countdown til fadderuka</h2>
+        <div style="margin: 1rem">
+          <h3 id="countdownP">Laster countdown..</h3>
+        </div>
       </div>
       <div>
-        <p>TODOs</p>
-        <ul id="todoUl"></ul>
+        <h2>Bucket list items</h2>
+        <div>
+          <p>Ting som er gjort:</p>
+          <ol id="doneUl"></ol>
+        </div>
+        <div>
+          <p>Ting som lyt gjøres:</p>
+          <ul id="todoUl"></ul>
+        </div>
+        <div>
+          <label>Legg til nytt bucket list item: </label
+          ><input id="newItemId" /><button
+            onclick="newBucketListItem(document.getElementById('newItemId').value)"
+          >
+            Add
+          </button>
+        </div>
       </div>
-      <div>
-        <label>Legg til nytt bucket list item: </label
-        ><input id="newItemId" /><button
-          onclick="newBucketListItem(document.getElementById('newItemId').value)"
-        >
-          Add
-        </button>
-      </div>
-    </div>
+    </main>
     <script type="text/javascript" src="index.js"></script>
   </body>
 </html>
