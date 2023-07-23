@@ -5,6 +5,53 @@
     const test = () => {
       console.log("test");
     };
+    // Stolen from https://www.w3schools.com/howto/howto_js_countdown.asp
+    const fadderukaStartDate = new Date("Aug 14, 2023 10:00:00");
+    // Update the count down every 1 second
+    const interval = setInterval(function () {
+      var distance = fadderukaStartDate.getTime() - new Date().getTime();
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdownP").innerHTML =
+        days + "d " + hours + "t " + minutes + "m " + seconds + "s ";
+
+      if (distance < 0) {
+        clearInterval(setInterval);
+        console.warn("Fadderuka has started");
+      }
+    }, 1000);
+
+    const defaultduedate = fadderukaStartDate;
+    const sampleDb = [
+      {
+        name: "bade i en fontene",
+        done: false,
+        due: defaultduedate,
+      },
+
+      {
+        name: "bade i ifi-dammen",
+        done: false,
+        due: defaultduedate,
+      },
+      {
+        name: "møte en rev",
+        done: false,
+        due: defaultduedate,
+      },
+      {
+        name: "klappe en hund",
+        done: true,
+        due: defaultduedate,
+      },
+    ];
+
+    console.log(sampleDb);
   </script>
   <head>
     <title>Summer dashboard 2023</title>
@@ -15,5 +62,34 @@
     <div>
       <button onclick="test()">Init new database</button>
     </div>
+    <div>
+      <h2>Countdown til fadderuka</h2>
+      <p id="countdownP"></p>
+    </div>
+    <div>
+      <h2>Bucket list items</h2>
+      <div>
+        <p>Done</p>
+        <ul id="doneUl"></ul>
+      </div>
+      <div>
+        <p>TODOs</p>
+        <ul id="todoUl"></ul>
+      </div>
+    </div>
+    <script type="text/javascript">
+      for (let i = 0; i < sampleDb.length; i++) {
+        console.log(i, sampleDb[i]);
+        const item = sampleDb[i];
+        document.getElementById(
+          item.done ? "doneUl" : "todoUl"
+        ).innerHTML += `<li><input type="checkbox" id="${item.name}" name="${item.name}">${item.name}<label for="${item.name}>${item.name}</label></li>`;
+        if (item.done) {
+          console.log("done");
+        } else {
+          console.log("not done");
+        }
+      }
+    </script>
   </body>
 </html>
