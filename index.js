@@ -31,28 +31,29 @@ const newBucketListItem = (newName) =>
     )
   ) || generateLists();
 
+const generateCheckbox = (item) =>
+  `<li><input type="checkbox" id="${item.name}" name="${
+    item.name
+  }" class="checkboxes" ${item.done ? "checked" : ""}>${item.name}<label for="${
+    item.name
+  }>${item.name}</label></li>`;
+
 const generateLists = () => {
   document.getElementById("doneUl").innerHTML = "";
   document.getElementById("todoUl").innerHTML = "";
+
   const parsedDb = JSON.parse(localStorage.getItem("db"));
   parsedDb.forEach((item) => {
-    document.getElementById(
-      item.done ? "doneUl" : "todoUl"
-    ).innerHTML += `<li><input type="checkbox" id="${item.name}" name="${
-      item.name
-    }" class="checkboxes" ${item.done ? "checked" : ""}>${
-      item.name
-    }<label for="${item.name}>${item.name}</label></li>`;
+    document.getElementById(item.done ? "doneUl" : "todoUl").innerHTML +=
+      generateCheckbox(item);
   });
   const allCheckboxes = document.getElementsByClassName("checkboxes");
   for (let i = 0; i < allCheckboxes.length; i++) {
     allCheckboxes[i].addEventListener("change", (event) => {
       parsedDb.forEach((item) => {
         if (item.name === event.target.name) {
-          if (item.done) {
-            item.doneDate = new Date();
-          }
           item.done = !item.done;
+          item.doneDate = item.done ? new Date() : null;
           generateLists();
           localStorage.setItem("db", JSON.stringify(parsedDb));
         }
