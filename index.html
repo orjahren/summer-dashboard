@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
   <script type="text/javascript">
-    // Stolen from https://www.w3schools.com/howto/howto_js_countdown.asp
     const fadderukaStartDate = new Date("Aug 14, 2023 10:00:00");
-    // Update the count down every 1 second
     const interval = setInterval(function () {
       var distance = fadderukaStartDate.getTime() - new Date().getTime();
       var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -19,9 +17,7 @@
         console.warn("Fadderuka has started");
       }
     }, 1000);
-
     const defaultduedate = fadderukaStartDate;
-
     const newBucketListItem = (newName) =>
       localStorage.setItem(
         "db",
@@ -37,39 +33,6 @@
           ])
         )
       ) || generateLists();
-
-    const sampleDb = [
-      {
-        name: "bade i en fontene",
-        done: false,
-        due: defaultduedate,
-        doneDate: null,
-        startedDate: new Date(),
-      },
-
-      {
-        name: "bade i ifi-dammen",
-        done: false,
-        due: defaultduedate,
-        doneDate: null,
-        startedDate: new Date(),
-      },
-      {
-        name: "møte en rev",
-        done: false,
-        due: defaultduedate,
-        doneDate: null,
-        startedDate: new Date(),
-      },
-      {
-        name: "klappe en hund",
-        done: true,
-        due: defaultduedate,
-        doneDate: new Date(),
-        startedDate: new Date(),
-      },
-    ];
-    //localStorage.setItem("db", JSON.stringify(sampleDb));
   </script>
   <head>
     <title>Summer dashboard 2023</title>
@@ -114,7 +77,6 @@
             item.name
           }<label for="${item.name}>${item.name}</label></li>`;
         });
-
         const allCheckboxes = document.getElementsByClassName("checkboxes");
         for (let i = 0; i < allCheckboxes.length; i++) {
           allCheckboxes[i].addEventListener("input", (event) => {
