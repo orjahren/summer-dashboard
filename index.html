@@ -26,6 +26,25 @@
       }
     }, 1000);
 
+    const addItemToDatabase = (item) => {
+      const db = JSON.parse(localStorage.getItem("db"));
+      db.push(item);
+      localStorage.setItem("db", JSON.stringify(db));
+    };
+
+    const newBucketListItem = (newName) => {
+      console.log(newName);
+      const newItem = {
+        name: newName,
+        done: false,
+        due: fadderukaStartDate,
+        doneDate: null,
+        startedDate: new Date(),
+      };
+      addItemToDatabase(newItem);
+      generateLists();
+    };
+
     const defaultduedate = fadderukaStartDate;
     const sampleDb = [
       {
@@ -84,11 +103,18 @@
         <p>TODOs</p>
         <ul id="todoUl"></ul>
       </div>
+      <div>
+        <label>Legg til nytt bucket list item: </label
+        ><input id="newItemId" /><button
+          onclick="newBucketListItem(document.getElementById('newItemId').value)"
+        >
+          Add
+        </button>
+      </div>
     </div>
     <script type="text/javascript">
-      let parsedDb = JSON.parse(localStorage.getItem("db")) ?? [];
-
       const generateLists = () => {
+        const parsedDb = JSON.parse(localStorage.getItem("db"));
         document.getElementById("doneUl").innerHTML = "";
         document.getElementById("todoUl").innerHTML = "";
         parsedDb.forEach((item) => {
@@ -110,7 +136,6 @@
                 item.done = !item.done;
                 generateLists();
                 localStorage.setItem("db", JSON.stringify(parsedDb));
-                parsedDb = JSON.parse(localStorage.getItem("db"));
               }
             });
           });
