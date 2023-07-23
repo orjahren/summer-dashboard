@@ -79,7 +79,7 @@
         });
         const allCheckboxes = document.getElementsByClassName("checkboxes");
         for (let i = 0; i < allCheckboxes.length; i++) {
-          allCheckboxes[i].addEventListener("input", (event) => {
+          allCheckboxes[i].addEventListener("change", (event) => {
             parsedDb.forEach((item) => {
               if (item.name === event.target.name) {
                 if (item.done) {
