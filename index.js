@@ -62,3 +62,15 @@ const generateLists = () => {
 };
 
 generateLists();
+
+const currentYear = new Date().getFullYear();
+
+const mainHeading = document.getElementById('mainHeading');
+if (mainHeading) {
+  mainHeading.textContent = `Summer dashboard ${currentYear}`;
+}
+
+const pageTitle = document.getElementById('pageTitle');
+if (pageTitle) {
+  pageTitle.textContent = `Summer dashboard ${currentYear}`;
+}
