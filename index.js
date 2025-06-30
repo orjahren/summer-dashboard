@@ -19,7 +19,7 @@ const interval = setInterval(function () {
   document.getElementById("countdownP").innerHTML =
     days + "d " + hours + "t " + minutes + "m " + seconds + "s ";
   if (distance < 0) {
-    clearInterval(setInterval);
+    clearInterval(interval);
     console.warn("Fadderuka has started");
   }
 }, 1000);
