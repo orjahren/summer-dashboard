@@ -65,7 +65,7 @@ generateLists();
 
 const currentYear = new Date().getFullYear();
 
-const mainHeading = document.getElementById('mainHeading');
+const mainHeading = document.getElementById('mainTitle');
 if (mainHeading) {
   mainHeading.textContent = `Summer dashboard ${currentYear}`;
 }
