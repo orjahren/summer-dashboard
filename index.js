@@ -1,10 +1,10 @@
 "use strict";
 const currentYear = new Date().getFullYear();
-const mainHeading = document.getElementById('mainTitle');
+const mainHeading = document.getElementById("mainTitle");
 if (mainHeading) {
   mainHeading.textContent = `Summer dashboard ${currentYear}`;
 }
-const pageTitle = document.getElementById('pageTitle');
+const pageTitle = document.getElementById("pageTitle");
 if (pageTitle) {
   pageTitle.textContent = `Summer dashboard ${currentYear}`;
 }
