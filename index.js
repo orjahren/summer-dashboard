@@ -1,21 +1,12 @@
 "use strict";
 const currentYear = new Date().getFullYear();
-const mainHeading = document.getElementById("mainTitle");
-if (mainHeading) {
-  mainHeading.textContent = `Summer dashboard ${currentYear}`;
-}
-const pageTitle = document.getElementById("pageTitle");
-if (pageTitle) {
-  pageTitle.textContent = `Summer dashboard ${currentYear}`;
-}
+["mainTitle", "pageTitle"].forEach((id) => document.getElementById(id).textContent = `Summer dashboard ${currentYear}`);
 
 const fadderukaStartDate = new Date("Aug 11, 2025 00:00:00");
 const interval = setInterval(function () {
   const distance = fadderukaStartDate.getTime() - new Date().getTime();
   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor(
-    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  );
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
   document.getElementById("countdownP").innerHTML =
