@@ -11,11 +11,13 @@ if (pageTitle) {
 
 const fadderukaStartDate = new Date("Aug 11, 2025 00:00:00");
 const interval = setInterval(function () {
-  var distance = fadderukaStartDate.getTime() - new Date().getTime();
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  const distance = fadderukaStartDate.getTime() - new Date().getTime();
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(
+    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
   document.getElementById("countdownP").innerHTML =
     days + "d " + hours + "t " + minutes + "m " + seconds + "s ";
   if (distance < 0) {
