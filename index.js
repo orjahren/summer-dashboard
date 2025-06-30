@@ -1,5 +1,5 @@
 "use strict";
-const fadderukaStartDate = new Date("Aug 12, 2024 00:00:00");
+const fadderukaStartDate = new Date("Aug 11, 2025 00:00:00");
 const interval = setInterval(function () {
   var distance = fadderukaStartDate.getTime() - new Date().getTime();
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
